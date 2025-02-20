@@ -10,7 +10,7 @@ A web scraping solution for books.toscrape.com with data analysis capabilities t
 - ⚡ Multi-threaded scraping with retry mechanism
 
 ## Technologies Used
-- **Python 3.9+**
+- **Python 3.10+**
 - Web Scraping: `requests`, `BeautifulSoup4`
 - NLP Processing: `scikit-learn`
 - Data Handling: `dataclasses`, `json`
