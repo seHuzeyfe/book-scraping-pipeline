@@ -30,7 +30,7 @@ class BookScraper:
         self.processed_urls: Set[str] = set()
         
     def get_page(self, url: str, retries: int = 3, delay: float = 1.0) -> Optional[BeautifulSoup]:
-        """Fetching and parsing the web page with retry mechanism."""
+        """Fetching and parsıng the web page with retry mechnism."""
         for attempt in range(retries):
             try:
                 if url in self.processed_urls:
@@ -55,7 +55,7 @@ class BookScraper:
         if not url.startswith('http'):
             # Remove any '../' sequences
             url = url.replace('../', '')
-            # Ensure we have the correct path structure
+            # Ensure for correct path structure
             if 'catalogue' not in url:
                 url = f"catalogue/{url}"
             # Join with base URL
@@ -101,7 +101,7 @@ class BookScraper:
             )
             
         except Exception as e:
-            print(f"Error processing book at {book_url}: {str(e)}")
+            print(f"Eror processing book at {book_url}: {str(e)}")
             return None
 
     def save_batch(self, books: List[Book], batch_num: int):
@@ -122,9 +122,9 @@ class BookScraper:
         print(f"Saved batch {batch_num} with {len(books)} books")
 
     def scrape_catalog(self):
-        """Scrape all book catalogs using thread pool and batch saving."""
+        """Scrape all book catalogs using thread pol and batch saving."""
         book_urls = []
-        current_url = f"{self.base_url}/catalogue/page-1.html"  # tart with correct catalog URL
+        current_url = f"{self.base_url}/catalogue/page-1.html"  #correct catalog Url
         page_num = 1
         
         # First, collect all book URLs
@@ -141,7 +141,6 @@ class BookScraper:
             for book_element in book_elements:
                 book_url = book_element.h3.a['href']
                 if not book_url.startswith('http'):
-                    # Fix: Handle relative URLs correctly
                     book_url = book_url.replace('../../../', '')
                     book_url = f"{self.base_url}/catalogue/{book_url}"
                 book_urls.append(book_url)
@@ -152,14 +151,13 @@ class BookScraper:
             
             next_url = next_page['href']
             if not next_url.startswith('http'):
-                # Fix: Handle pagination URLs correctly
                 current_url = f"{self.base_url}/catalogue/{next_url}"
             else:
                 current_url = next_url
             
             page_num += 1
         
-        print(f"Found {len(book_urls)} books to process")
+        print(f"Find {len(book_urls)} books to proces")
         
         # Process books using thread pool with batching
         current_batch = []
@@ -189,17 +187,17 @@ class BookScraper:
                             
                     processed_count += 1
                     if processed_count % 10 == 0:  # Progress update every 10 books
-                        print(f"Processed {processed_count}/{len(book_urls)} books")
+                        print(f"Prrocessed {processed_count}/{len(book_urls)} boks")
                         
                 except Exception as e:
-                    print(f"Error processing {url}: {str(e)}")
+                    print(f"Error proessing {url}: {str(e)}")
             
             # Save any remaining books
             if current_batch:
                 self.save_batch(current_batch, batch_num)
 
     def save_to_json(self, filename: str = 'data/books_final.json'):
-        """Save all scraped books to a final JSON file."""
+        """Save all scraped books to a final Json fil."""
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(
                 [book.__dict__ for book in self.books],

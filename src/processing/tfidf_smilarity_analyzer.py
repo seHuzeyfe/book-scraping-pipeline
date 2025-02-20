@@ -5,10 +5,10 @@ from typing import List, Dict
 import json
 from collections import defaultdict
 
-class BookAnalyzer:
+class TFIDFBookAnalyzer:
     """Analyzes book descriptions and groups similar books."""
     
-    def __init__(self, similarity_threshold: float = 0.3):
+    def __init__(self, similarity_threshold: float = 0.6):
         self.vectorizer = TfidfVectorizer(
             stop_words='english',
             max_features=1000,
@@ -85,7 +85,7 @@ class BookAnalyzer:
         
         return formatted_groups
     
-    def save_groups(self, groups: Dict[str, List[Dict]], filename: str = 'data/book_groups.json'):
+    def save_groups(self, groups: Dict[str, List[Dict]], filename: str = 'data/tfidf_book_groups.json'):
         """Save grouped books to JSON file."""
         try:
             with open(filename, 'w', encoding='utf-8') as f:
@@ -94,22 +94,25 @@ class BookAnalyzer:
         except Exception as e:
             print(f"Error saving groups: {str(e)}")
 
-def analyze_books():
-    """Main function to analyze and group books."""
-    analyzer = BookAnalyzer(similarity_threshold=0.3)
-    
-    if analyzer.load_books():
-        groups = analyzer.create_similarity_groups()
-        analyzer.save_groups(groups)
+    def analyze_and_print_summary(self):
+        analyzer = TFIDFBookAnalyzer(similarity_threshold=0.6)
         
-        # Print summary
-        print("\nAnalysis Summary:")
-        print(f"Total number of groups: {len(groups)}")
-        print("\nSample groups:")
-        for group_name, books in list(groups.items())[:3]:  # Show first 3 groups
-            print(f"\n{group_name}: {len(books)} books")
-            for book in books[:2]:  # Show first 2 books in each group
-                print(f"- {book['title']} (similarity: {book['similarity_score']:.2f})")
+        if analyzer.load_books():
+            groups = analyzer.create_similarity_groups()
+            analyzer.save_groups(groups)
+            
+
+            print("\n TF-IDF Analysis Summary:")
+            print(f"Total number of groups: {len(groups)}")
+            print("\nSample groups:")
+            for group_name, books in list(groups.items())[:3]:  # Show first 3 groups
+                print(f"\n{group_name}: {len(books)} books")
+                for book in books[:2]:  # Show first 2 books in each group
+                    print(f"- {book['title']} (similarity: {book['similarity_score']:.2f})")
+
+def main():
+    analyzer = TFIDFBookAnalyzer(similarity_threshold=0.6)
+    analyzer.analyze_and_print_summary()
 
 if __name__ == "__main__":
-    analyze_books()
+    main()
