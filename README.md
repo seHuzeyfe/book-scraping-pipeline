@@ -14,7 +14,6 @@ A web scraping solution for books.toscrape.com with data analysis capabilities t
 - Web Scraping: `requests`, `BeautifulSoup4`
 - NLP Processing: `scikit-learn`
 - Data Handling: `dataclasses`, `json`
-- Concurrency: `concurrent.futures`
 
 ## Installation
 1. Clone repository:
@@ -34,16 +33,6 @@ A web scraping solution for books.toscrape.com with data analysis capabilities t
    ```bash
    pip install -r requirements.txt
    ```
-
-## Requirements
-Create `requirements.txt` with:
-```
-beautifulsoup4==4.12.2
-requests==2.31.0
-scikit-learn==1.3.0
-numpy==1.24.3
-tqdm==4.65.0
-```
 
 ## Usage
 Run the complete pipeline:
