@@ -87,6 +87,9 @@ python main.py
   },
 ]
 ```
+![alt text](<Ekran görüntüsü 2025-02-20 115923.png>)
+
+
 
 ### Similarity Groups (`book_groups.json`)
 ```json
