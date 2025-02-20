@@ -115,14 +115,22 @@ Loaded 1000 books
 Saved groups to data/book_groups.json
 
 Analysis Summary:
-Total number of books: 1000
-Total number of groups: 45
+Total number of groups: 205
 
 Sample groups:
 
-Group_1: 5 books
-- "Python Programming" (similarity: 0.89)
-- "Advanced Python" (similarity: 0.85)
+Group_1: 2 books
+- Tipping the Velvet (similarity: 0.39)
+- Musicophilia: Tales of Music and the Brain (similarity: 0.39)
+
+Group_2: 2 books
+- Soumission (similarity: 0.33)
+- The Nightingale (similarity: 0.33)
+
+Group_3: 5 books
+- The Requiem Red (similarity: 0.36)
+- How Music Works (similarity: 0.47)
+
 ```
 
 ## Project Structure
